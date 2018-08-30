@@ -98,6 +98,7 @@ catch (e) {
 // load compiled js template
 }
 
+  
 function getVals() {
   e = document.getElementsByClassName('get');
   ui = new Object(); 
@@ -112,13 +113,13 @@ function getVals() {
     str+=q+k+q+':'+q+ui[k]+q+',';
     }
   }
-  str='{'+str+'}';
-  str=str.replace(/,}/g,'}');
+  str='{'+str
+  // +'}'; str=str.replace(/,}/g,'}');
   upfront='SaveTabs - Add Details || ';
   document.getElementById("update").innerHTML=upfront+str;
 return false;
-
-}
+}  
+  
 
 
 function updateTags() {
