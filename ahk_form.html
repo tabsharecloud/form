@@ -1,0 +1,513 @@
+<html lang=en><head><meta charset=UTF-8>
+<title id=update>Save Tabs</title></head>
+
+<body style='background-color:rgba(0,0,0,0.88);height:90%'>
+<div class='wrapper'>
+
+<form class=actual onsubmit='return getVals()' autocorrect="true">
+<div class="field">
+  <label class="label">Title</label>
+  <div class="control">
+    <textarea autofocus name=title class="get user input" type="text" placeholder="Optional" onkeydown='return disEnter(event);'></textarea>
+  </div>
+</div>
+
+<div class="field">
+  <label class="label">Keywords</label>
+  <div class="control">
+<textarea name=keywords class="get user textarea" 
+placeholder="Optional" onkeydown='return disEnter(event);'></textarea>
+  </div>
+</div>
+
+<div class="field inline tags">
+  <label class="label">Tag</label>
+  <div class="control">
+    <input name=tag class="user input tagInfo" type="text" placeholder="Optional">
+<!--onchange=updateTags();-->
+  </div>
+</div>
+
+<div class="field inline color">
+  <label class="label">Color</label>
+  <div class="control">
+    <div class="select">
+      <select id=color class=tagInfo name=color onchange=updateTags();this.style.backgroundColor=this.value;>
+        <option value=''></option>
+        <option value=blue>Blue</option>
+        <option value=red>Red</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<div class='hide field'>
+  <div class="control">
+    <input id=tagsOut name=tags class="get input" type="text">
+  </div>
+</div>
+
+<div class='field'>
+  <div class="control level-item">
+    <button class="button is-link" onclick=getVals() value=submit>Save</button>
+  </div>
+</div>
+
+</form>
+
+</div></body>
+
+<div id="result"></div>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--[if IE]>
+
+// handle svg
+// --handle flexbox
+// https://github.com/jonathantneal/flexibility
+
+<![endif]-->
+
+
+<script>
+
+if(navigator.userAgent.indexOf('Opera Mini')>-1){
+// --handle hashchange
+// https://github.com/millermedeiros/hasher/
+}
+
+try {
+    eval("`foo`");
+// load template literal
+}
+catch (e) {
+// load compiled js template
+}
+
+function getVals() {
+  e = document.getElementsByClassName('get');
+  ui = new Object(); 
+  for (var i=0; i<e.length; i++) {
+    ui[e[i].name] = e[i].value;
+  } str=''; q='"';
+  for (k in ui) {
+    if(ui[k]==""){continue}
+    if(k=="tags"){
+      str+=q+k+q+':'+'{'+ui[k]+'}'+',';
+    }else{
+    str+=q+k+q+':'+q+ui[k]+q+',';
+    }
+  }
+  str='{'+str+'}';
+  str=str.replace(/,}/g,'}');
+  upfront='SaveTabs - Add Details || ';
+  document.getElementById("update").innerHTML=upfront+str;
+return false;
+
+}
+
+
+function updateTags() {
+  e = document.getElementsByClassName('tagInfo');
+  ui = new Object();
+  for (var i=0; i<e.length; i++) {
+    ui[e[i].name] = e[i].value;
+  } str=''; q='"'; l=e.length
+  for (k in ui) {
+    if(ui[k]==""){continue}
+    str+=q+k+q+':'+q+ui[k]+q+',';
+  }
+  document.getElementById("tagsOut").value=str;
+}
+
+
+function disEnter(event) {
+  if (event.keyCode==13||event.keyCode==222){
+    getVals();return false;
+  } else{return true}
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+
+.wrapper{
+  display:flex;align-items:center;
+  flex-direction:column;justify-content:center;
+  width:100vh;
+  width:100%;
+  height:98vh;
+  height:98%;
+}
+
+.hide{display:none}
+
+body,
+html,
+textarea {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+::after,
+::before {
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 16px;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  min-width: 300px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body,
+button,
+input,
+select,
+textarea {
+  font-family: BlinkMacSystemFont, -apple-system, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Helvetica,
+    Arial, sans-serif;
+}
+
+body {
+  color: #4a4a4a;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+
+/* FLEXBOX */
+
+.level {
+  align-items: center;
+  justify-content: space-between;
+}
+
+.level-item {
+  align-items: center;
+  display: flex;
+  flex-basis: auto;
+  flex-grow: 0;
+  flex-shrink: 0;
+  justify-content: center;
+}
+
+
+/* FORMS */
+
+button,
+input,
+select,
+textarea {
+  margin: 0;
+}
+
+.input,
+.select select,
+.textarea {
+  -moz-appearance: none;-webkit-appearance: none;
+  align-items: center;
+  box-shadow: none;
+  border: 1px solid transparent;
+  display: inline-flex;
+  font-size: 1rem;
+  height: 2.25em;
+  justify-content: flex-start;
+  line-height: 1.5;
+  padding-bottom: calc(0.375em - 1px);
+  padding-left: calc(0.625em - 1px);
+  padding-right: calc(0.625em - 1px);
+  padding-top: calc(0.375em - 1px);
+  position: relative;
+  vertical-align: top;
+}
+
+.field:not(:last-child) {
+  margin-bottom: 1rem;
+}
+
+.field:last-child {
+  margin-top: 2rem;
+}
+
+
+/* BUTTONS */
+
+.button {
+  border:transparent;
+  background-color: #fff;
+  color: #363636;
+  cursor: pointer;
+  justify-content: center;
+  padding: 10px 38px 12px 38px;
+  text-align: center;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.button.is-focused:not(:active),
+.button:focus:not(:active) {
+  box-shadow: 0 0 0 0.125em rgba(50, 115, 220, 0.25);
+}
+
+.button {
+  -moz-appearance: none;-webkit-appearance: none;
+  align-items: center;
+}
+
+.button {
+  -webkit-touch-callout: none; -webkit-user-select: none;
+  -moz-user-select: none; -ms-user-select: none;
+  user-select: none;
+}
+
+.button:active {
+  border-color: #4a4a4a;
+  color: #363636;
+}
+
+.button.is-link {
+  background-color: #3273dc;
+  border-bottom: solid 2px blue;
+  color: #fff;
+}
+
+.button.is-link:hover {
+  background-color: #276cda;
+  border-color: transparent;
+  color: #fff;
+}
+
+.button:active,
+.button:focus {
+  outline: 0;
+}
+
+
+
+
+
+
+/* INPUT TEXTAREA & LABELS */
+
+.input,
+.textarea {
+  background-color: #fff;
+  border-color: #dbdbdb;
+  color: #363636;
+  box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1);
+  max-width: 100%;
+  width: 380px;
+}
+
+.input:hover,
+.textarea:hover {
+  border-color: #b5b5b5;
+}
+
+.input:active,
+.input:focus,
+.textarea:active,
+.textarea:focus {
+  border-color: #3273dc;
+  box-shadow: 0 0 0 0.125em rgba(50, 115, 220, 0.25);
+}
+
+.textarea {
+  display: block;
+  max-width: 100%;
+  min-width: 100%;
+  padding: 0.625em;
+  resize: vertical;
+}
+
+.textarea:not([rows]) {
+  max-height: 600px;
+  min-height: 120px;
+}
+
+.label {
+  color: rgba(255,255,255,.8);
+  display: block;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.label:not(:last-child) {
+  margin: 0 0 10px 4px;
+}
+
+.control {
+  font-size: 1rem;
+  position: relative;
+  text-align: left;
+}
+.input::-moz-placeholder,
+.textarea::-moz-placeholder {
+  color: rgba(54, 54, 54, 0.3);
+  font-size: 12px;
+}
+.input::-webkit-input-placeholder,
+.textarea::-webkit-input-placeholder {
+  color: rgba(54, 54, 54, 0.3);
+  font-size: 12px;
+}
+.input:-moz-placeholder,
+.textarea:-moz-placeholder {
+  color: rgba(54, 54, 54, 0.3);
+  font-size: 12px;
+}
+.input:-ms-input-placeholder,
+.textarea:-ms-input-placeholder {
+  color: rgba(54, 54, 54, 0.3);
+  font-size: 12px;
+}
+
+.input:active,
+.input:focus,
+.textarea:active,
+.textarea:focus {
+  outline: 0;
+}
+
+
+/* SELECT */
+
+.select:not(.is-multiple):not(.is-loading)::after {
+  border: 3px solid transparent;
+  border-radius: 2px;
+  border-right: 0;
+  border-top: 0;
+  content: " ";
+  display: block;
+  height: 0.625em;
+  margin-top: -0.4375em;
+  pointer-events: none;
+  position: absolute;
+  top: 50%;
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  -webkit-transform-origin: center;
+  transform-origin: center;
+  width: 0.625em;
+}
+
+.select {
+  display: inline-block;
+  max-width: 100%;
+  position: relative;
+  vertical-align: top;
+}
+.select:not(.is-multiple) {
+  height: 2.25em;
+}
+.select:not(.is-multiple):not(.is-loading)::after {
+  border-color: #3273dc;
+  right: 1.125em;
+  z-index: 4;
+}
+.select select {
+  background-color: #fff;
+  border-color: #dbdbdb;
+  color: #363636;
+  cursor: pointer;
+  display: block;
+  font-size: 1em;
+  max-width: 100%;
+  outline: 0;
+}
+.select select::-moz-placeholder {
+  color: rgba(54, 54, 54, 0.3);
+}
+.select select::-webkit-input-placeholder {
+  color: rgba(54, 54, 54, 0.3);
+}
+.select select:-moz-placeholder {
+  color: rgba(54, 54, 54, 0.3);
+}
+.select select:-ms-input-placeholder {
+  color: rgba(54, 54, 54, 0.3);
+}
+.select select:hover {
+  border-color: #b5b5b5;
+}
+.select select:active,
+.select select:focus {
+  border-color: #3273dc;
+  box-shadow: 0 0 0 0.125em rgba(50, 115, 220, 0.25);
+}
+.select select::-ms-expand {
+  display: none;
+}
+.select select:not([multiple]) {
+  padding-right: 2.5em;
+}
+
+.select select:active,
+.select select:focus{
+  outline: 0;
+}
+
+
+/* MINOR TWEAKS */
+
+.field.inline{display:inline-block;}
+.field.inline.color{width:auto;}
+.field.inline.tags{width:180px;}
+</style>
